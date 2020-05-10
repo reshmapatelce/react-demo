@@ -5,14 +5,18 @@ class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      postData: null
+      postData: null,
+      isLoading: false,
+      description: null
     }
   }
 
   getPostData = () => {
+    this.setState({ isLoading: true })
     axios.get("https://jsonplaceholder.typicode.com/posts/" + this.props.postId).then(response => {
       this.setState({
-        postData: response.data
+        postData: response.data,
+        isLoading: false
       })
     })
   }
@@ -30,11 +34,17 @@ class Post extends Component {
   }
 
   render() {
-    const { postData } = this.state;
+    const { postData, isLoading, description } = this.state;
+    if (isLoading) {
+      return "Fetching..";
+    }
     return (
       <div>
         {postData ? <div><h1> {postData.title}</h1>
-          <p>{postData.body}</p> </div> : "Please Select any one Post"}
+          <p>{postData.body}</p>
+          <button onClick={() => this.props.setDescription(postData.id)}>Get Data</button>
+        </div> : "Please Select any one Post"}
+        {description}
       </div>
     )
   }

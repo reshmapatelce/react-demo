@@ -10,7 +10,8 @@ import './App.css';
 class App extends Component {
   state = {
     demoId: "todo-demo1",
-    postId: null
+    postId: null,
+    postDesc: null
   }
 
   demoChangeHandler = (id) => {
@@ -18,20 +19,25 @@ class App extends Component {
       demoId: id
     })
   }
-  postHandler = (postId) => {   
+  postHandler = (postId) => {
     this.setState({
       postId
     })
   }
- 
+
+  setDescription = desc => {
+    this.setState({ postDesc: desc })
+  }
+
   render() {
+    const { demoId, postId, postDesc } = this.state;
     return (
       <div>
         <Header />
         <Navbar />
         <div className="content-body">
-          <Sidebar changeDemo={this.demoChangeHandler} postClick={this.postHandler} />
-          <Content demoId={this.state.demoId} postId={this.state.postId} />
+          <Sidebar changeDemo={this.demoChangeHandler} postClick={this.postHandler} postDesc={postDesc} />
+          <Content demoId={demoId} postId={postId} setDescription={this.setDescription} />
           <div style={{ clear: 'both' }}></div>
         </div>
         <Footer />
