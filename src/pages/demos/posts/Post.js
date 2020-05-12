@@ -7,7 +7,8 @@ class Post extends Component {
     this.state = {
       postData: null,
       isLoading: false,
-      description: null
+      description: null,
+      showPostId: null
     }
   }
 
@@ -22,6 +23,9 @@ class Post extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    // if (this.props.showPostBtn) {
+    //   this.setState({ showPostId: null })
+    // }
     if (this.props.postId !== prevProps.postId) {
       this.getPostData();
     }
@@ -32,9 +36,18 @@ class Post extends Component {
       this.getPostData();
     }
   }
+  buttonClicked = (id) => {
+    console.log("id", id)
+    this.props.setDescription(id);
+    this.setState({ showPostId: id })
+  }
 
   render() {
-    const { postData, isLoading, description } = this.state;
+
+    const { postData, isLoading, showPostId } = this.state;
+
+    console.log("showPostId", showPostId);
+    console.log("pid", this.props.postId);
     if (isLoading) {
       return "Fetching..";
     }
@@ -42,9 +55,8 @@ class Post extends Component {
       <div>
         {postData ? <div><h1> {postData.title}</h1>
           <p>{postData.body}</p>
-          <button onClick={() => this.props.setDescription(postData.id)}>Get Data</button>
+          {showPostId !== this.props.postId && this.props.showPostBtn ? <button onClick={() => this.buttonClicked(postData.id)}>Get Data</button> : null}
         </div> : "Please Select any one Post"}
-        {description}
       </div>
     )
   }

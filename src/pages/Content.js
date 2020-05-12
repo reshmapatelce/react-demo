@@ -11,7 +11,7 @@ class Content extends Component {
       <div className="content">
         {demoId === "todo-demo" && <TodoForm />}
         {demoId === "todo-demo1" && <Validate />}
-        {demoId === "todo-demo2" && <Post postId={postId} setDescription={this.props.setDescription} />}
+        {demoId === "todo-demo2" && <Post postId={postId} setDescription={this.props.setDescription} showPostBtn={this.props.showPostBtn}/>}
       </div>
     )
   }

@@ -11,7 +11,8 @@ class App extends Component {
   state = {
     demoId: "todo-demo1",
     postId: null,
-    postDesc: null
+    postDesc: null,
+    showPostBtn: false
   }
 
   demoChangeHandler = (id) => {
@@ -28,6 +29,9 @@ class App extends Component {
   setDescription = desc => {
     this.setState({ postDesc: desc })
   }
+  postDescHandler = () => {
+    this.setState({ showPostBtn: true, postDesc: null })
+  }
 
   render() {
     const { demoId, postId, postDesc } = this.state;
@@ -36,8 +40,8 @@ class App extends Component {
         <Header />
         <Navbar />
         <div className="content-body">
-          <Sidebar changeDemo={this.demoChangeHandler} postClick={this.postHandler} postDesc={postDesc} />
-          <Content demoId={demoId} postId={postId} setDescription={this.setDescription} />
+          <Sidebar changeDemo={this.demoChangeHandler} postClick={this.postHandler} postDesc={postDesc} showPostId={this.postDescHandler} />
+          <Content demoId={demoId} postId={postId} setDescription={this.setDescription} showPostBtn={this.state.showPostBtn} />
           <div style={{ clear: 'both' }}></div>
         </div>
         <Footer />

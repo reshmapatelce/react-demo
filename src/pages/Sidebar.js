@@ -25,7 +25,10 @@ class Sidebar extends Component {
       this.setState({ getData: details });
     }
   }
-
+  closeDesc = () => { 
+    this.setState({ getData: null });
+    this.props.showPostId()
+  }
   render() {
     const { postData, isLoading, getData } = this.state;
 
@@ -38,7 +41,8 @@ class Sidebar extends Component {
         {postData.length > 0 ? <PostList postDetails={postData} postClick={this.props.postClick} postLoading={isLoading} /> : null}
         {getData && <React.Fragment>
           <b>Selected description</b><br />
-          {getData.body}
+          {getData.body} <br />
+          <button onClick={this.closeDesc}>close</button>
         </React.Fragment>}
 
       </div>
