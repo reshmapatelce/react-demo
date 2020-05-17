@@ -1,51 +1,33 @@
 import React, { Component } from 'react';
-// import Myform from "./Form";
 import Header from './pages/Header';
 import Navbar from './pages/Navbar';
-import Sidebar from './pages/Sidebar';
-import Content from './pages/Content';
 import Footer from './pages/Footer';
 import './App.css';
 
+import Example from './Example';
+import Home from './Home';
+import About from './About';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import Notfound from './Notfound';
+import Contact from './Contact';
+import Demo from './route-demo/Demo';
+
 class App extends Component {
-  state = {
-    demoId: "todo-demo1",
-    postId: null,
-    postDesc: null,
-    showPostBtn: false
-  }
-
-  demoChangeHandler = (id) => {
-    this.setState({
-      demoId: id
-    })
-  }
-  postHandler = (postId) => {
-    this.setState({
-      postId
-    })
-  }
-
-  setDescription = desc => {
-    this.setState({ postDesc: desc })
-  }
-  postDescHandler = () => {
-    this.setState({ showPostBtn: true, postDesc: null })
-  }
-
   render() {
-    const { demoId, postId, postDesc } = this.state;
     return (
-      <div>
+      <Router>
         <Header />
         <Navbar />
-        <div className="content-body">
-          <Sidebar changeDemo={this.demoChangeHandler} postClick={this.postHandler} postDesc={postDesc} showPostId={this.postDescHandler} />
-          <Content demoId={demoId} postId={postId} setDescription={this.setDescription} showPostBtn={this.state.showPostBtn} />
-          <div style={{ clear: 'both' }}></div>
-        </div>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/example" component={Example} />
+          <Route path="/route-demo" component={Demo} />
+          <Route path="/about/:id?" component={About} />
+          <Route path="/contact" component={Contact} />
+          <Route component={Notfound} />
+        </Switch>
         <Footer />
-      </div>
+      </Router>
     );
   }
 }

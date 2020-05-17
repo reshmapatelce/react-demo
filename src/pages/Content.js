@@ -6,12 +6,12 @@ import Post from './demos/posts/Post';
 class Content extends Component {
 
   render() {
-    const { demoId, postId } = this.props;
+    const { demoId, postId, postDesc } = this.props;
     return (
       <div className="content">
         {demoId === "todo-demo" && <TodoForm />}
         {demoId === "todo-demo1" && <Validate />}
-        {demoId === "todo-demo2" && <Post postId={postId} setDescription={this.props.setDescription} showPostBtn={this.props.showPostBtn}/>}
+        {demoId === "todo-demo2" && <Post postId={postId} postDesc={postDesc} setDescription={this.props.setDescription} showPostBtn={this.props.showPostBtn}/>}
       </div>
     )
   }

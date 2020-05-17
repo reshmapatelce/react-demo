@@ -55,7 +55,7 @@ class Post extends Component {
       <div>
         {postData ? <div><h1> {postData.title}</h1>
           <p>{postData.body}</p>
-          {showPostId !== this.props.postId && this.props.showPostBtn ? <button onClick={() => this.buttonClicked(postData.id)}>Get Data</button> : null}
+          {this.props.postDesc !== this.props.postId ? <button onClick={() => this.buttonClicked(postData.id)}>Get Data</button> : null}
         </div> : "Please Select any one Post"}
       </div>
     )
